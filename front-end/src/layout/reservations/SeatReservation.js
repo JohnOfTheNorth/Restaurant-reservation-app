@@ -6,7 +6,7 @@ import Tables from "../tables/Tables";
 
 function SeatReservation() {
   const reservationId = useParams();
-  const [tableId, setTableId] = useState(3);
+  const [tableId, setTableId] = useState(1);
   const [seatingError, setSeatingError] = useState(null);
   const history = useHistory();
 
