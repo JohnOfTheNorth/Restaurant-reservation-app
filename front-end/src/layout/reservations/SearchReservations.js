@@ -38,7 +38,7 @@ function SearchReservations() {
       <form onSubmit={handleSubmit}>
         <input
           className="form-control form-group"
-          type="number"
+          type="text"
           name="mobile_number"
           value={number}
           onChange={handleChange}
