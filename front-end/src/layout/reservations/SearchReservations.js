@@ -27,9 +27,10 @@ function SearchReservations() {
     return () => abortController.abort();
   }
 
-  function handleChange({ target }) {
-    setNumber(target.value);
-  }
+  const onlyAllowNumbers = (event) => {
+    let input = event.target.value.replace(/\D/g, "");
+    setNumber(input.slice(0, 10));
+  };
 
   return (
     <div className="card-body text-center">
@@ -41,7 +42,7 @@ function SearchReservations() {
           type="text"
           name="mobile_number"
           value={number}
-          onChange={handleChange}
+          onChange={onlyAllowNumbers}
           placeholder="Enter a customer's phone number"
           required
         />

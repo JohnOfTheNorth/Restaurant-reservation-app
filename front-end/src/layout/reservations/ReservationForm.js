@@ -1,7 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-function ReservationForm({ handleChange, handleSubmit, formData }) {
+function ReservationForm({
+  handleChange,
+  handleSubmit,
+  formatMobileNumber,
+  formData,
+}) {
   const history = useHistory();
 
   return (
@@ -39,8 +44,9 @@ function ReservationForm({ handleChange, handleSubmit, formData }) {
             <input
               className="form-control"
               id="mobile_number"
-              onChange={handleChange}
-              type="text"
+              onChange={formatMobileNumber}
+              type="tel"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               name="mobile_number"
               required
               placeholder="Mobile number"

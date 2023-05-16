@@ -27,6 +27,25 @@ function NewReservation() {
     }));
   };
 
+  const formatMobileNumber = (event) => {
+    const prevChar = event.target.value[event.target.value.length - 1];
+    let input = event.target.value.replace(/\D/g, "");
+    if (input.length === 3 && prevChar === "-") {
+      input += "-";
+    } else if (input.length === 6 && prevChar === "-") {
+      input =
+        input.slice(0, 3) + "-" + input.slice(3, 6) + "-" + input.slice(7, 11);
+    } else {
+      if (input.length > 3) {
+        input = input.slice(0, 3) + "-" + input.slice(3, 10);
+      }
+      if (input.length > 7) {
+        input = input.slice(0, 7) + "-" + input.slice(7, 11);
+      }
+    }
+    setFormData((curr) => ({ ...curr, mobile_number: input }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const abortController = new AbortController();
@@ -54,6 +73,7 @@ function NewReservation() {
         formData={formData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        formatMobileNumber={formatMobileNumber}
       />
     </div>
   );
