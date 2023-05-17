@@ -16,7 +16,7 @@ function DisplayTables({ tables }) {
           "Is this table ready to seat new guests? This cannot be undone."
         )
       ) {
-        await deleteTable(tableId);
+        await deleteTable(tableId, abortController.signal);
         history.go();
       }
     } catch (error) {
@@ -26,9 +26,11 @@ function DisplayTables({ tables }) {
   }
 
   const showTables = tables.map((table) => {
+    const isOccupied = table.reservation_id !== null;
+
     return (
-      <div className="container fluid my-3">
-        <div key={table.table_id} className="col">
+      <div className="container fluid my-3" key={table.table_id}>
+        <div className="col">
           <div className="card">
             <div className="card-body">
               <h5 className="card-title text-center">
@@ -39,18 +41,19 @@ function DisplayTables({ tables }) {
                 Table Size: {table.capacity}
               </h5>
               <h5 className="text-center" data-table-id-status={table.table_id}>
-                Status: {table.reservation_id ? "Occupied" : "Free"}
+                Status: {isOccupied ? "Occupied" : "Free"}
               </h5>
-
-              <div className="text-center">
-                <button
-                  className="btn btn-danger"
-                  data-table-id-finish={table.table_id}
-                  onClick={() => handleClear(table)}
-                >
-                  Finish
-                </button>
-              </div>
+              {isOccupied && (
+                <div className="text-center">
+                  <button
+                    className="btn btn-danger"
+                    data-table-id-finish={table.table_id}
+                    onClick={() => handleClear(table)}
+                  >
+                    Finish
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

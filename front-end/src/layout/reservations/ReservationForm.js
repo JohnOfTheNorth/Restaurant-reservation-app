@@ -46,7 +46,6 @@ function ReservationForm({
               id="mobile_number"
               onChange={formatMobileNumber}
               type="tel"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               name="mobile_number"
               required
               placeholder="Mobile number"
